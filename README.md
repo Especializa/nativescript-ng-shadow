@@ -1,6 +1,8 @@
 # NativeScript Angular Shadow Directive Plugin  ![apple](https://cdn3.iconfinder.com/data/icons/picons-social/57/16-apple-32.png) ![android](https://cdn4.iconfinder.com/data/icons/logos-3/228/android-32.png)
 
 [![npm version](https://badge.fury.io/js/nativescript-ng-shadow.svg)](http://badge.fury.io/js/nativescript-ng-shadow)
+![Dependencies status](https://david-dm.org/Especializa/nativescript-ng-shadow/status.svg)
+![devDependencies status](https://david-dm.org/Especializa/nativescript-ng-shadow/dev-status.svg)
 
 Then describe what's the purpose of your plugin.
 
