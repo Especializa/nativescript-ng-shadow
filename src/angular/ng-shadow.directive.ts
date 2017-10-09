@@ -91,9 +91,9 @@ export class NativeShadowDirective implements OnInit, OnChanges {
       const elevation = parseFloat(((this.elevation as number) - 0).toFixed(2));
       tnsView.ios.layer.maskToBounds = false;
       tnsView.ios.layer.shadowColor = new Color('#000000').ios.CGColor;
-      tnsView.ios.layer.shadowOffset = CGSizeMake(0, 0.5 * elevation);
-      tnsView.ios.layer.shadowOpacity = 0.0015 * elevation + 0.18;
-      tnsView.ios.layer.shadowRadius = 0.40 * elevation;
+      tnsView.ios.layer.shadowOffset = CGSizeMake(0, 0.35 * elevation);
+      tnsView.ios.layer.shadowOpacity = 0.015 * elevation + 0.18;
+      tnsView.ios.layer.shadowRadius = 0.35 * elevation - 0.1;
     }
   }
 
