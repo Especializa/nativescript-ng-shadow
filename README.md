@@ -140,7 +140,7 @@ class MyComponent {
     this.mySnackBar.elevation = Elevation.SNACKBAR;
   }
   // ...
-  }
+}
 ```
 
 ## Changelog
