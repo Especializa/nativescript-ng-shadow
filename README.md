@@ -62,12 +62,12 @@ Of course you can property bind it:
 ```xml
 <Label shadow [elevation]="myPotentiallyVolatileElevation"></Label>
 ```
-There are a couple of platform specific attributes you might want to use to customize your view. Bare in mind some of them clash with CSS styles applied to the same views. When it happens, the default behaviour on Android is the original HTML/CSS styles are lost in favor of the ones provided by this directive. On iOS, on the other hand, HTML/CSS pre-existent styles are regarded, consequently the shadow might be applied.
+There are a couple of platform specific attributes you might want to use to customize your view. Bare in mind some of them clash with CSS styles applied to the same views. When it happens, the default behaviour on Android is the original HTML/CSS styles are lost in favor of the ones provided by this directive. On iOS, on the other hand, HTML/CSS pre-existent styles are regarded, consequently the shadow might not be applied.
 
 The tip is, avoid applying things like **background color** and **border radius** to the same view you intend to apply this directive. You are always able to nest views and get what you want. If not, please [leave a message](https://github.com/Especializa/nativescript-ng-shadow/issues) so we can try to help.
 
 ### List of attributes
-The table below list and describes all possible attributes as well show which platform supports each one of them:
+The table below list and describes all possible attributes as well as show which platform supports each one of them:
 
 | Attribute | Type | Platform | Description |
 | --- | -- | --- | --- |
