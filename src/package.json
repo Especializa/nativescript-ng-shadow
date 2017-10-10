@@ -16,7 +16,7 @@
         "postclone": "npm i && node scripts/postclone.js && cd ../demo && npm i && cd ../src && npm run plugin.link",
         "test.android": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build android && tns test android --justlaunch",
         "test.ios": "npm i && npm run tsc && npm run tslint && cd ../demo && tns build ios && tns test ios --justlaunch",
-        "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\" --exclude '*.d.ts' --fix",
+        "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\" --exclude \"**/tns_modules/**\" --exclude \"**/*.d.ts\" --fix",
         "plugin.link": "npm link && cd ../demo && npm link nativescript-ng-shadow && cd ../src",
         "plugin.tscwatch": "npm run tsc -- -w",
         "demo.ios": "npm i && npm run tsc && cd ../demo && tns run ios --syncAllFiles",
@@ -26,7 +26,7 @@
         "demo.reset": "cd ../demo && rimraf platforms",
         "plugin.prepare": "npm run tsc && cd ../demo && tns plugin remove nativescript-ng-shadow && tns plugin add ../src",
         "clean": "cd ../demo && rimraf hooks node_modules platforms && cd ../src && rimraf node_modules && npm run plugin.link",
-        "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '*.d.ts'"
+        "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/tns_modules/**' --exclude '**/*.d.ts'"
     },
     "keywords": [
         "NativeScript",
@@ -56,8 +56,6 @@
     "homepage": "https://github.com/Especializa/nativescript-ng-shadow",
     "readmeFilename": "README.md",
     "devDependencies": {
-        "@angular/core": "^4.4.4",
-        "nativescript-angular": "^4.2.0",
         "prompt": "^1.0.0",
         "rimraf": "^2.5.0",
         "tns-core-modules": "^3.1.0",
@@ -65,6 +63,17 @@
         "tslint": "^5.0.0",
         "typescript": "~2.4.0"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@angular/common": "~4.2.5",
+        "@angular/compiler": "~4.2.5",
+        "@angular/core": "~4.2.5",
+        "@angular/forms": "~4.2.5",
+        "@angular/http": "~4.2.5",
+        "@angular/platform-browser": "~4.2.5",
+        "@angular/router": "~4.2.5",
+        "nativescript-angular": "^4.2.0",
+        "rxjs": "^5.0.1",
+        "zone.js": "^0.8.4"
+    },
     "bootstrapper": "nativescript-plugin-seed"
 }

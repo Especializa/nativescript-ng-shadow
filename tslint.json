@@ -16,7 +16,7 @@
             true,
             "no-public"
         ],
-
+        "member-ordering": false,
         "class-name": true,
         "comment-format": [
             true,
@@ -31,14 +31,14 @@
         "no-internal-module": true,
         "no-trailing-whitespace": true,
         "no-var-keyword": true,
+        "no-var-requires": false,
         "one-line": [
             true,
             "check-open-brace",
             "check-whitespace"
         ],
         "quotemark": [
-            true,
-            "single"
+            false
         ],
         "semicolon": [
             true,

@@ -3,6 +3,7 @@ import { AndroidData } from '../common/android-data.model';
 import { IOSData } from '../common/ios-data.model';
 import { Shape } from '../common/shape.enum';
 export declare class NativeShadowDirective implements OnInit, OnChanges {
+    private el;
     shadow: string | AndroidData | IOSData;
     elevation?: number | string;
     shape?: Shape;
@@ -13,7 +14,6 @@ export declare class NativeShadowDirective implements OnInit, OnChanges {
     shadowOffset?: number | string;
     shadowOpacity?: number | string;
     shadowRadius?: number | string;
-    private el;
     private loaded;
     constructor(el: ElementRef);
     ngOnInit(): void;
