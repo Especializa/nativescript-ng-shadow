@@ -1,18 +1,30 @@
-import { ElementRef, OnInit, SimpleChanges, OnChanges } from '@angular/core';
-import { BackgroundData } from '../common/background-data.model';
+import { ElementRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AndroidData } from '../common/android-data.model';
+import { IOSData } from '../common/ios-data.model';
 import { Shape } from '../common/shape.enum';
 export declare class NativeShadowDirective implements OnInit, OnChanges {
     private el;
-    shadow: string | BackgroundData;
+    shadow: string | AndroidData | IOSData;
     elevation?: number | string;
     shape?: Shape;
     bgcolor?: string;
     cornerRadius?: number | string;
+    maskToBounds?: boolean;
+    shadowColor?: string;
+    shadowOffset?: number | string;
+    shadowOpacity?: number | string;
+    shadowRadius?: number | string;
     private loaded;
     constructor(el: ElementRef);
     ngOnInit(): void;
     onLoaded(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    applyShadow(): void;
-    private loadFromObject();
+    private applyShadow();
+    private initializeCommonData();
+    private initializeAndroidData();
+    private initializeIOSData();
+    private applyOnAndroid(nativeView);
+    private applyOnIOS(nativeView);
+    private loadFromAndroidData(data);
+    private loadFromIOSData(data);
 }
