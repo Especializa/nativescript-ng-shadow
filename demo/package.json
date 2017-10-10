@@ -3,6 +3,10 @@
 	"license": "SEE LICENSE IN <your-license-filename>",
 	"readme": "NativeScript Application",
 	"repository": "<fill-your-repository-here>",
+	"scripts": {
+		"build.plugin": "cd ../src && npm run build",
+		"ci.tslint": "npm i && tslint --config '../tslint.json' 'app/**/*.ts' --exclude '**/node_modules/**' --fix"
+	},
 	"nativescript": {
 		"id": "org.nativescript.demo",
 		"tns-android": {
@@ -35,6 +39,7 @@
 		"babylon": "6.18.0",
 		"lazy": "1.0.11",
 		"nativescript-dev-typescript": "0.5.1",
+		"tslint": "^5.0.0",
 		"typescript": "2.5.2"
 	}
 }
