@@ -1,6 +1,7 @@
 import { Directive, ElementRef, HostListener,
          Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Color } from 'tns-core-modules/color';
+import { isAndroid, isIOS } from 'tns-core-modules/platform';
 
 import { AndroidData } from '../common/android-data.model';
 import { IOSData } from '../common/ios-data.model';
@@ -33,18 +34,18 @@ export class NativeShadowDirective implements OnInit, OnChanges {
 
     this.initializeCommonData();
 
-    if (this.el.nativeElement.android) {
+    if (isAndroid) {
       this.initializeAndroidData();
-    } else if (this.el.nativeElement.ios) {
+    } else if (isIOS) {
       this.initializeIOSData();
     }
     if (
       this.shadow &&
       (this.shadow as AndroidData | IOSData).elevation
     ) {
-      if (this.el.nativeElement.android) {
+      if (isAndroid) {
         this.loadFromAndroidData(this.shadow as AndroidData);
-      } else if (this.el.nativeElement.ios) {
+      } else if (isIOS) {
         this.loadFromIOSData(this.shadow as IOSData);
       }
     }
@@ -75,13 +76,13 @@ export class NativeShadowDirective implements OnInit, OnChanges {
         changes.shadow &&
         changes.shadow.currentValue.elevation
       ) {
-        if (this.el.nativeElement.android) {
+        if (isAndroid) {
           this.loadFromAndroidData(this.shadow as AndroidData);
-        } else if (this.el.nativeElement.ios) {
+        } else if (isIOS) {
           this.loadFromIOSData(this.shadow as IOSData);
         }
-        this.applyShadow();
       }
+      this.applyShadow();
     }
   }
 

@@ -1,8 +1,8 @@
-import { ElementRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { AndroidData } from '../common/android-data.model';
 import { IOSData } from '../common/ios-data.model';
 import { Shape } from '../common/shape.enum';
-export declare class NativeShadowDirective implements OnInit, OnChanges {
+export declare class NativeShadowDirective implements AfterViewInit, OnChanges {
     private el;
     shadow: string | AndroidData | IOSData;
     elevation?: number | string;
@@ -16,7 +16,7 @@ export declare class NativeShadowDirective implements OnInit, OnChanges {
     shadowRadius?: number | string;
     private loaded;
     constructor(el: ElementRef);
-    ngOnInit(): void;
+    ngAfterViewInit(): void;
     onLoaded(): void;
     ngOnChanges(changes: SimpleChanges): void;
     private applyShadow();
