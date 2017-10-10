@@ -8,20 +8,20 @@ import { AppComponent } from './app.component';
 
 @NgModule({
     bootstrap: [
-        AppComponent
+        AppComponent,
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule
+        AppRoutingModule,
     ],
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     providers: [
-        { provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader }
+        { provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader },
     ],
     schemas: [
-        NO_ERRORS_SCHEMA
-    ]
+        NO_ERRORS_SCHEMA,
+    ],
 })
 export class AppModule { }

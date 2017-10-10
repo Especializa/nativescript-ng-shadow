@@ -3,6 +3,7 @@
     "extends": [
         "tslint:recommended"
     ],
+    "ignoreDefinitionFiles": true,
     "jsRules": {},
     "rulesDirectory": [],
     "rules": {

@@ -13,10 +13,10 @@ import { NgShadowModule } from 'nativescript-ng-shadow';
         NgShadowModule,
     ],
     declarations: [
-        HomeComponent
+        HomeComponent,
     ],
     schemas: [
-        NO_ERRORS_SCHEMA
-    ]
+        NO_ERRORS_SCHEMA,
+    ],
 })
 export class HomeModule { }

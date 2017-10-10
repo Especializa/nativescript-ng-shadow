@@ -1,13 +1,13 @@
-import { ListPicker } from 'ui/list-picker';
 import { Component, OnInit } from '@angular/core';
 import { AndroidData, Elevation,
         Shape, ShapeEnum } from 'nativescript-ng-shadow';
+import { ListPicker } from 'ui/list-picker';
 
 @Component({
   moduleId: module.id,
   selector: 'Home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
     elevation = 2;
@@ -15,9 +15,6 @@ export class HomeComponent implements OnInit {
     stdElevations: string[] = [];
     show = true;
     androidData: AndroidData;
-
-    constructor() {
-    }
 
     ngOnInit(): void {
       for (const x in Elevation) {
@@ -37,7 +34,7 @@ export class HomeComponent implements OnInit {
     }
 
     setElevation(newValue) {
-      const picker = <ListPicker>newValue.object;
+      const picker = newValue.object as ListPicker;
       this.elevation = Elevation[this.stdElevations[picker.selectedIndex]];
       this.androidData = this.getAndroidData();
     }
