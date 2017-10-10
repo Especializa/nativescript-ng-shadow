@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     shape = ShapeEnum;
     stdElevations: string[] = [];
     show = true;
-    AndroidData: AndroidData;
+    androidData: AndroidData;
 
     constructor() {
     }
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
           this.stdElevations.push(x);
         }
       }
-      this.AndroidData = this.getAndroidData();
+      this.androidData = this.getAndroidData();
     }
 
     getAndroidData(): AndroidData {
@@ -39,6 +39,6 @@ export class HomeComponent implements OnInit {
     setElevation(newValue) {
       const picker = <ListPicker>newValue.object;
       this.elevation = Elevation[this.stdElevations[picker.selectedIndex]];
-      this.AndroidData = this.getAndroidData();
+      this.androidData = this.getAndroidData();
     }
 }
