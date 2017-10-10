@@ -1,5 +1,21 @@
 {
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rulesDirectory": [],
     "rules": {
+        "max-line-length": [
+            true,
+            80
+        ],
+        "object-literal-sort-keys": false,
+        "member-access": [
+            true,
+            "no-public"
+        ],
+
         "class-name": true,
         "comment-format": [
             true,
@@ -20,8 +36,8 @@
             "check-whitespace"
         ],
         "quotemark": [
-            false,
-            "double"
+            true,
+            "single"
         ],
         "semicolon": [
             true,
