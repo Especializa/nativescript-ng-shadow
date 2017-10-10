@@ -1,6 +1,6 @@
 import { Shape } from './shape.enum';
 
-export class BackgroundData {
+export class AndroidData {
   elevation: number;
   shape?: Shape;
   bgcolor?: string;

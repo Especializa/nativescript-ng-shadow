@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener,
          Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { Color } from 'tns-core-modules/color';
 
-import { BackgroundData } from '../common/background-data.model';
+import { AndroidData } from '../common/android-data.model';
 import { Shape, ShapeEnum } from '../common/shape.enum';
 
 declare const android: any;
@@ -11,7 +11,7 @@ declare const CGSizeMake: any;
 @Directive({ selector: '[shadow]' })
 export class NativeShadowDirective implements OnInit, OnChanges {
   @Input()
-  public shadow: string | BackgroundData;
+  public shadow: string | AndroidData;
   @Input()
   public elevation?: number | string;
   @Input()
@@ -46,7 +46,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     if (!this.bgcolor) {
       this.bgcolor = '#FFFFFF';
     }
-    if (this.shadow && (<BackgroundData>this.shadow).elevation) {
+    if (this.shadow && (<AndroidData>this.shadow).elevation) {
       this.loadFromObject();
     }
   }
@@ -66,7 +66,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
           changes.hasOwnProperty('bgcolor') ||
           changes.hasOwnProperty('cornerRadius')) ) {
       if (changes.shadow &&
-          (<BackgroundData>changes.shadow.currentValue).elevation) {
+          (<AndroidData>changes.shadow.currentValue).elevation) {
         this.loadFromObject();
       }
       this.applyShadow();
@@ -98,9 +98,9 @@ export class NativeShadowDirective implements OnInit, OnChanges {
   }
 
   private loadFromObject() {
-    this.elevation = (<BackgroundData>this.shadow).elevation || this.elevation;
-    this.shape = (<BackgroundData>this.shadow).shape || this.shape;
-    this.bgcolor = (<BackgroundData>this.shadow).bgcolor || this.bgcolor;
-    this.cornerRadius = (<BackgroundData>this.shadow).cornerRadius || this.cornerRadius;
+    this.elevation = (<AndroidData>this.shadow).elevation || this.elevation;
+    this.shape = (<AndroidData>this.shadow).shape || this.shape;
+    this.bgcolor = (<AndroidData>this.shadow).bgcolor || this.bgcolor;
+    this.cornerRadius = (<AndroidData>this.shadow).cornerRadius || this.cornerRadius;
   }
 }
