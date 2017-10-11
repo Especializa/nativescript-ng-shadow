@@ -15,6 +15,7 @@ export declare class NativeShadowDirective implements OnInit, OnChanges {
     shadowOpacity?: number | string;
     shadowRadius?: number | string;
     private loaded;
+    private initialized;
     constructor(el: ElementRef);
     ngOnInit(): void;
     onLoaded(): void;

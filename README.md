@@ -9,7 +9,7 @@
 [build-url]:https://travis-ci.org/Especializa/nativescript-ng-shadow
 [npm-image]:http://img.shields.io/npm/v/nativescript-ng-shadow.svg
 [npm-url]:https://npmjs.org/package/nativescript-ng-shadow
-[downloads-image]:http://img.shields.io/npm/dm/nativescript-ng-shadow.svg
+[downloads-image]:http://img.shields.io/npm/dt/nativescript-ng-shadow.svg
 [twitter-image]:https://img.shields.io/twitter/follow/especializa.svg?style=social&label=Follow%20us
 [twitter-url]:https://twitter.com/especializa
 

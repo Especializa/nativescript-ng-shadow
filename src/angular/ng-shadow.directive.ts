@@ -24,6 +24,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
   @Input() shadowRadius?: number | string;
 
   private loaded = false;
+  private initialized = false;
 
   constructor(private el: ElementRef) {}
 
@@ -49,11 +50,22 @@ export class NativeShadowDirective implements OnInit, OnChanges {
         this.loadFromIOSData(this.shadow as IOSData);
       }
     }
+    this.initialized = true;
   }
 
   @HostListener('loaded')
   onLoaded() {
     this.loaded = true;
+    // Weirdly ngOnInit isn't called on iOS on demo app
+    // Managed to get it working on iOS when applying to
+    // FlexboxLayout, but on the demo app, we apply to a
+    // Label, and, for that case, ngOnInit isn't called
+
+    // This is just enforcing the Directive is initialized
+    // before calling this.applyShadow()
+    if (!this.initialized) {
+      this.ngOnInit();
+    }
     this.applyShadow();
   }
 
@@ -155,7 +167,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     nativeView.layer.shadowColor = new Color(this.shadowColor).ios.CGColor;
     nativeView.layer.shadowOffset =
       this.shadowOffset ?
-      parseFloat(this.shadowOffset as string) :
+      CGSizeMake(0, parseFloat(this.shadowOffset as string)) :
       CGSizeMake(0, 0.35 * elevation);
     nativeView.layer.shadowOpacity =
       this.shadowOpacity ?

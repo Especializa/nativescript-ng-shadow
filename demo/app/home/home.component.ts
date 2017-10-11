@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
     elevation = 2;
     shape = ShapeEnum;
     stdElevations: string[] = [];
-    show = true;
     androidData: AndroidData;
 
     ngOnInit(): void {

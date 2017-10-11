@@ -1,6 +1,6 @@
 {
     "name": "nativescript-ng-shadow",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "Angular directive to apply shadows to native elements according to the elevation level guidelines of material design specification",
     "main": "ng-shadow",
     "typings": "ng-shadow.d.ts",
@@ -56,14 +56,6 @@
     "homepage": "https://github.com/Especializa/nativescript-ng-shadow",
     "readmeFilename": "README.md",
     "devDependencies": {
-        "prompt": "^1.0.0",
-        "rimraf": "^2.5.0",
-        "tns-core-modules": "^3.1.0",
-        "tns-platform-declarations": "^3.1.0",
-        "tslint": "^5.0.0",
-        "typescript": "~2.4.0"
-    },
-    "dependencies": {
         "@angular/common": "~4.2.5",
         "@angular/compiler": "~4.2.5",
         "@angular/core": "~4.2.5",
@@ -73,7 +65,14 @@
         "@angular/router": "~4.2.5",
         "nativescript-angular": "^4.2.0",
         "rxjs": "^5.0.1",
-        "zone.js": "^0.8.4"
+        "zone.js": "^0.8.4",
+        "prompt": "^1.0.0",
+        "rimraf": "^2.5.0",
+        "tns-core-modules": "^3.1.0",
+        "tns-platform-declarations": "^3.1.0",
+        "tslint": "^5.0.0",
+        "typescript": "~2.4.0"
     },
+    "dependencies": {},
     "bootstrapper": "nativescript-plugin-seed"
 }
