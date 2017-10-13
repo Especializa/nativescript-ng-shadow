@@ -3,7 +3,6 @@
 [![Build Status][build-status]][build-url]
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
-[![DevDependencies][dev-dependencies-image]][npm-url]
 [![Twitter Follow][twitter-image]][twitter-url]
 
 [build-status]:https://travis-ci.org/Especializa/nativescript-ng-shadow.svg?branch=master
@@ -11,7 +10,6 @@
 [npm-image]:http://img.shields.io/npm/v/nativescript-ng-shadow.svg
 [npm-url]:https://npmjs.org/package/nativescript-ng-shadow
 [downloads-image]:http://img.shields.io/npm/dt/nativescript-ng-shadow.svg
-[dev-dependencies-image]:https://david-dm.org/Especializa/nativescript-ng-shadow/dev-status.svg
 [twitter-image]:https://img.shields.io/twitter/follow/especializa.svg?style=social&label=Follow%20us
 [twitter-url]:https://twitter.com/especializa
 
