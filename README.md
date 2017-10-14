@@ -72,7 +72,7 @@ The table below list and describes all possible attributes as well as show which
 | Attribute | Type | Platform | Description |
 | --- | -- | --- | --- |
 | shadow | string \| number \| [AndroidData](https://github.com/Especializa/nativescript-ng-shadow/blob/master/src/common/android-data.model.ts) \| [IOSData](https://github.com/Especializa/nativescript-ng-shadow/blob/master/src/common/ios-data.model.ts) | both | Directive attribute. Providing `null` or empty string with no `elevation` attribute, will switch off the shadow |
-| elevation | number \| string | both | Determines the elevation of the view from the surface. It does all shadow related calculations. You might want to check it out [this enum](https://github.com/Especializa/nativescript-ng-shadow/blob/master/src/common/elevation.enum.ts) of standard material design elevations.
+| elevation | number \| string | both | Determines the elevation of the view from the surface. It does all shadow related calculations. You might want to have a look at [this enum](https://github.com/Especializa/nativescript-ng-shadow/blob/master/src/common/elevation.enum.ts) of standard material design elevations.
 | shape | string => `'RECTANGLE'` \| `'OVAL'` \| `'RING'` \| `'LINE'` | Android | Determines the shape of the view and overrides its format styles.
 | bgcolor | string => color #RGB | Android | Determines view's background color and overrides its previous background. |
 | cornerRadius | number | Android | Determines view's corner radius *(CSS border-radius)* and overrides its previous style. |
@@ -83,7 +83,7 @@ The table below list and describes all possible attributes as well as show which
 | shadowRadius | number | iOS | Determines the blurring effect of the shadow. The higher the more blurred. |
 
 ### `AndroidData` and `IOSData`
-As you might have noticed the main `shadow` attribute accepts objects as arguments. You'll to set as property bind and they will override any possible separate attribute you might have defined:
+As you might have noticed the main `shadow` attribute accepts object as argument. You'll be able to assign it in a property bind and it will override any possible separate attribute you might have defined:
 
 #### Component
 ```typescript
@@ -129,6 +129,7 @@ If you want to be consistent with the Material Design specification but you're s
 - MODAL_BOTTOM_SHEET: 16
 - DIALOG: 24
 - PICKER: 24
+
 If you don't even want to check it out every time you have to shadow a view, just import the `Elevation` enum and enjoy :)
 
 #### Component
