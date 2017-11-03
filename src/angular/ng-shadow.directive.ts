@@ -1,5 +1,7 @@
-import { Directive, ElementRef, HostListener,
-         Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Directive, ElementRef, HostListener,
+  Input, OnChanges, OnInit, SimpleChanges
+} from '@angular/core';
 import { Color } from 'tns-core-modules/color';
 import { isAndroid, isIOS } from 'tns-core-modules/platform';
 
@@ -26,7 +28,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
   private loaded = false;
   private initialized = false;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) { }
 
   ngOnInit() {
     if (this.shadow === null || (this.shadow === '' && !this.elevation)) {
@@ -73,7 +75,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     if (
       this.loaded &&
       !!changes &&
-      ( changes.hasOwnProperty('shadow') ||
+      (changes.hasOwnProperty('shadow') ||
         changes.hasOwnProperty('elevation') ||
         changes.hasOwnProperty('shape') ||
         changes.hasOwnProperty('bgcolor') ||
@@ -82,7 +84,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
         changes.hasOwnProperty('shadowColor') ||
         changes.hasOwnProperty('shadowOffset') ||
         changes.hasOwnProperty('shadowOpacity') ||
-        changes.hasOwnProperty('shadowRadius') )
+        changes.hasOwnProperty('shadowRadius'))
     ) {
       if (
         changes.shadow &&
@@ -106,6 +108,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     if (tnsView.android) {
       this.applyOnAndroid(tnsView.android);
     } else if (tnsView.ios) {
+      tnsView.clipToBounds = false;
       this.applyOnIOS(tnsView.ios);
     }
   }
@@ -167,16 +170,16 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     nativeView.layer.shadowColor = new Color(this.shadowColor).ios.CGColor;
     nativeView.layer.shadowOffset =
       this.shadowOffset ?
-      CGSizeMake(0, parseFloat(this.shadowOffset as string)) :
-      CGSizeMake(0, 0.35 * elevation);
+        CGSizeMake(0, parseFloat(this.shadowOffset as string)) :
+        CGSizeMake(0, 0.35 * elevation);
     nativeView.layer.shadowOpacity =
       this.shadowOpacity ?
-      parseFloat(this.shadowOpacity as string) :
-      0.015 * elevation + 0.18;
+        parseFloat(this.shadowOpacity as string) :
+        0.015 * elevation + 0.18;
     nativeView.layer.shadowRadius =
       this.shadowRadius ?
-      parseFloat(this.shadowRadius as string) :
-      0.35 * elevation - 0.1;
+        parseFloat(this.shadowRadius as string) :
+        0.35 * elevation - 0.1;
   }
 
   private loadFromAndroidData(data: AndroidData) {
