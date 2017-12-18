@@ -77,9 +77,9 @@ The table below list and describes all possible attributes as well as show which
 | cornerRadius | number | Android | Determines view's corner radius *(CSS border-radius)* and overrides its previous style. <br>PS: Since version 2.0, it's calculated in DIPs (or DPs, _density independent pixels_). |
 | maskToBounds | boolean => default: false | iOS | Determines whether the shadow will be limited to the view margins. |
 | shadowColor | string => color #RGB | iOS | Determines shadow color. Shadow won't be applied if the view already has background. |
-| shadowOffset | number | iOS | Determines the distance (only on Y axis) of the shadow. Negative value shows the shadow above the view. <br>PS: Since version 2.0, it's calculated in PTs (_points_). |
+| shadowOffset | number | iOS | Determines the distance in points (only on Y axis) of the shadow. Negative value shows the shadow above the view. |
 | shadowOpacity | number | iOS | From 0 to 1. Determines the opacity level of the shadow. |
-| shadowRadius | number | iOS | Determines the blurring effect of the shadow. The higher the more blurred. <br>PS: Since version 2.0, it's calculated in PTs (_points_). |
+| shadowRadius | number | iOS | Determines the blurring effect in points of the shadow. The higher the more blurred. |
 
 ### `AndroidData` and `IOSData`
 As you might have noticed the main `shadow` attribute accepts object as argument. You'll be able to assign it in a property bind and it will override any possible separate attribute you might have defined:
