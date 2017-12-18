@@ -193,24 +193,21 @@ export class NativeShadowDirective implements OnInit, OnChanges {
   }
 
   private applyOnIOS(nativeView: any) {
-    const scale = UIScreen!.mainScreen!.scale || 1;
-    const elevation = parseFloat(
-      ((this.elevation as number) * scale).toFixed(2),
-    );
+    const elevation = parseFloat(((this.elevation as number) - 0).toFixed(2));
     nativeView.layer.maskToBounds = false;
     nativeView.layer.shadowColor = new Color(this.shadowColor).ios.CGColor;
     nativeView.layer.shadowOffset =
       this.shadowOffset ?
       CGSizeMake(0, parseFloat(this.shadowOffset as string)) :
-      CGSizeMake(0, 0.18 * elevation - 0.14);
+      CGSizeMake(0, 0.54 * elevation - 0.14);
     nativeView.layer.shadowOpacity =
       this.shadowOpacity ?
       parseFloat(this.shadowOpacity as string) :
-      0.002 * elevation + 0.25;
+      0.006 * elevation + 0.25;
     nativeView.layer.shadowRadius =
       this.shadowRadius ?
       parseFloat(this.shadowRadius as string) :
-      0.22 * elevation - 0.5;
+      0.66 * elevation - 0.5;
   }
 
   private loadFromAndroidData(data: AndroidData) {
