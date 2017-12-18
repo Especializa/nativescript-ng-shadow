@@ -9,6 +9,7 @@ import { Shape, ShapeEnum } from '../common/shape.enum';
 
 declare const android: any;
 declare const CGSizeMake: any;
+declare const UIScreen: any;
 
 @Directive({ selector: '[shadow]' })
 export class NativeShadowDirective implements OnInit, OnChanges {
@@ -17,6 +18,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
   @Input() shape?: Shape;
   @Input() bgcolor?: string;
   @Input() cornerRadius?: number | string;
+  @Input() translationZ?: number | string;
   @Input() maskToBounds?: boolean;
   @Input() shadowColor?: string;
   @Input() shadowOffset?: number | string;
@@ -29,12 +31,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    if (this.shadow === null || (this.shadow === '' && !this.elevation)) {
-      return;
-    }
-
     this.initializeCommonData();
-
     if (isAndroid) {
       this.initializeAndroidData();
     } else if (isIOS) {
@@ -50,6 +47,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
         this.loadFromIOSData(this.shadow as IOSData);
       }
     }
+    this.applyShadow();
     this.initialized = true;
   }
 
@@ -73,17 +71,27 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     if (
       this.loaded &&
       !!changes &&
-      ( changes.hasOwnProperty('shadow') ||
+      (
+        changes.hasOwnProperty('shadow') ||
         changes.hasOwnProperty('elevation') ||
         changes.hasOwnProperty('shape') ||
         changes.hasOwnProperty('bgcolor') ||
         changes.hasOwnProperty('cornerRadius') ||
+        changes.hasOwnProperty('translationZ') ||
         changes.hasOwnProperty('maskToBounds') ||
         changes.hasOwnProperty('shadowColor') ||
         changes.hasOwnProperty('shadowOffset') ||
         changes.hasOwnProperty('shadowOpacity') ||
-        changes.hasOwnProperty('shadowRadius') )
+        changes.hasOwnProperty('shadowRadius')
+      )
     ) {
+      if (
+        changes.hasOwnProperty('shadow') &&
+        !changes.hasOwnProperty('elevation') &&
+        typeof changes.shadow.currentValue === "number"
+    ) {
+        this.elevation = changes.shadow.currentValue;
+      }
       if (
         changes.shadow &&
         changes.shadow.currentValue.elevation
@@ -99,7 +107,11 @@ export class NativeShadowDirective implements OnInit, OnChanges {
   }
 
   private applyShadow() {
-    if (this.shadow === null || (this.shadow === '' && !this.elevation)) {
+    if (
+      this.shadow === null ||
+      this.shadow === undefined ||
+      (this.shadow === '' && !this.elevation)
+    ) {
       return;
     }
     const tnsView = this.el.nativeElement;
@@ -127,6 +139,9 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     if (typeof this.cornerRadius === 'string') {
       this.cornerRadius = parseInt(this.cornerRadius, 10);
     }
+    if (typeof this.translationZ === 'string') {
+      this.translationZ = parseInt(this.translationZ, 10);
+    }
     if (!this.shape) {
       this.shape = ShapeEnum.RECTANGLE;
     }
@@ -150,33 +165,52 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     }
   }
 
+  private dipToPixels(nativeView: any, dip: number) {
+    const metrics = nativeView.getContext().getResources().getDisplayMetrics();
+    return android.util.TypedValue.applyDimension(
+      android.util.TypedValue.COMPLEX_UNIT_DIP,
+      dip,
+      metrics,
+    );
+  }
+
   private applyOnAndroid(nativeView: any) {
     const shape = new android.graphics.drawable.GradientDrawable();
     shape.setShape(
       android.graphics.drawable.GradientDrawable[this.shape],
     );
     shape.setColor(android.graphics.Color.parseColor(this.bgcolor));
-    shape.setCornerRadius(this.cornerRadius);
+    shape.setCornerRadius(
+      this.dipToPixels(nativeView, this.cornerRadius as number),
+    );
     nativeView.setBackgroundDrawable(shape);
-    nativeView.setElevation(this.elevation);
+    nativeView.setElevation(
+      this.dipToPixels(nativeView, this.elevation as number),
+    );
+    nativeView.setTranslationZ(
+      this.dipToPixels(nativeView, this.translationZ as number),
+    );
   }
 
   private applyOnIOS(nativeView: any) {
-    const elevation = parseFloat(((this.elevation as number) - 0).toFixed(2));
+    const scale = UIScreen!.mainScreen!.scale || 1;
+    const elevation = parseFloat(
+      ((this.elevation as number) * scale).toFixed(2),
+    );
     nativeView.layer.maskToBounds = false;
     nativeView.layer.shadowColor = new Color(this.shadowColor).ios.CGColor;
     nativeView.layer.shadowOffset =
       this.shadowOffset ?
       CGSizeMake(0, parseFloat(this.shadowOffset as string)) :
-      CGSizeMake(0, 0.35 * elevation);
+      CGSizeMake(0, 0.18 * elevation - 0.14);
     nativeView.layer.shadowOpacity =
       this.shadowOpacity ?
       parseFloat(this.shadowOpacity as string) :
-      0.015 * elevation + 0.18;
+      0.002 * elevation + 0.25;
     nativeView.layer.shadowRadius =
       this.shadowRadius ?
       parseFloat(this.shadowRadius as string) :
-      0.35 * elevation - 0.1;
+      0.22 * elevation - 0.5;
   }
 
   private loadFromAndroidData(data: AndroidData) {
@@ -184,6 +218,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     this.shape = data.shape || this.shape;
     this.bgcolor = data.bgcolor || this.bgcolor;
     this.cornerRadius = data.cornerRadius || this.cornerRadius;
+    this.translationZ = data.translationZ || this.translationZ;
   }
 
   private loadFromIOSData(data: IOSData) {
