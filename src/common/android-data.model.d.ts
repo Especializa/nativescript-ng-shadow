@@ -4,4 +4,5 @@ export declare class AndroidData {
     shape?: Shape;
     bgcolor?: string;
     cornerRadius?: number;
+    translationZ?: number;
 }
