@@ -197,13 +197,11 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     const elevation = parseFloat(
       ((this.elevation as number) * scale).toFixed(2),
     );
-    const shadowOffset = parseFloat(this.shadowOffset as string) * scale;
-    const shadowRadius = parseFloat(this.shadowRadius as string);
     nativeView.layer.maskToBounds = false;
     nativeView.layer.shadowColor = new Color(this.shadowColor).ios.CGColor;
     nativeView.layer.shadowOffset =
       this.shadowOffset ?
-      CGSizeMake(0, shadowOffset) :
+      CGSizeMake(0, parseFloat(this.shadowOffset as string)) :
       CGSizeMake(0, 0.18 * elevation - 0.14);
     nativeView.layer.shadowOpacity =
       this.shadowOpacity ?
@@ -211,7 +209,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
       0.002 * elevation + 0.25;
     nativeView.layer.shadowRadius =
       this.shadowRadius ?
-      shadowRadius :
+      parseFloat(this.shadowRadius as string) :
       0.22 * elevation - 0.5;
   }
 
