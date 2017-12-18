@@ -22,8 +22,7 @@ tns plugin add nativescript-ng-shadow
 ## Demo
 If you want a quickstart, [check out the demo app](https://github.com/Especializa/nativescript-ng-shadow/tree/master/demo).
 
-[![N|Solid](https://raw.githubusercontent.com/Especializa/nativescript-ng-shadow/master/demo/app/tools/assets/demo.android.png)](https://www.udemy.com/angular-native)
-[![N|Solid](https://raw.githubusercontent.com/Especializa/nativescript-ng-shadow/master/demo/app/tools/assets/demo.ios.png)](https://www.udemy.com/angular-native)
+[![N|Solid](demo/app/tools/assets/screenshot.png)](https://www.udemy.com/angular-native)
 
 ### How to use it
 This is an Angular directive to make your life easier when it comes to native shadows.
@@ -58,13 +57,13 @@ Of course you can property bind it:
 ```xml
 <Label [shadow]="myCustomShadow"></Label>
 ```
-`shadow` is the directive itself and it doesn't reflect changes after the object is rendered. If you intend to change the elevation based on any event, you should use the `elevation` attribute:
+To provide other details, combine the `shadow` directive with other attributes:
 ```xml
-<Label shadow [elevation]="myPotentiallyVolatileElevation"></Label>
+<Label shadow [elevation]="myElevation" cornerRadius="5"></Label>
 ```
-There are a couple of platform specific attributes you might want to use to customize your view. Bare in mind some of them clash with CSS styles applied to the same views. When it happens, the default behaviour on Android is the original HTML/CSS styles are lost in favor of the ones provided by this directive. On iOS, on the other hand, HTML/CSS pre-existent styles are regarded, consequently the shadow might not be applied.
+There are a couple of platform specific attributes you might want to use to customize your view. Bear in mind some of them clash with CSS styles applied to the same views. When it happens, the default behaviour on Android is the original HTML/CSS styles are lost in favor of the ones provided by this directive. On iOS, on the other hand, HTML/CSS pre-existent styles are regarded, consequently the shadow might not be applied.
 
-The tip is, avoid applying things like **background color** and **border radius** to the same view you intend to apply this directive. You are always able to nest views and get what you want. If not, please [leave a message](https://github.com/Especializa/nativescript-ng-shadow/issues) so we can try to help.
+The tip is avoid applying things like **background color** and **border radius** to the same view you intend to apply this directive. You are always able to nest views and get what you want. If not, please [leave a message](https://github.com/Especializa/nativescript-ng-shadow/issues) so we can try to help.
 
 ### List of attributes
 The table below list and describes all possible attributes as well as show which platform supports each one of them:
@@ -72,15 +71,15 @@ The table below list and describes all possible attributes as well as show which
 | Attribute | Type | Platform | Description |
 | --- | -- | --- | --- |
 | shadow | string \| number \| [AndroidData](https://github.com/Especializa/nativescript-ng-shadow/blob/master/src/common/android-data.model.ts) \| [IOSData](https://github.com/Especializa/nativescript-ng-shadow/blob/master/src/common/ios-data.model.ts) | both | Directive attribute. Providing `null` or empty string with no `elevation` attribute, will switch off the shadow |
-| elevation | number \| string | both | Determines the elevation of the view from the surface. It does all shadow related calculations. You might want to have a look at [this enum](https://github.com/Especializa/nativescript-ng-shadow/blob/master/src/common/elevation.enum.ts) of standard material design elevations.
+| elevation | number \| string | both | Determines the elevation of the view from the surface. It does all shadow related calculations. You might want to have a look at [this enum](https://github.com/Especializa/nativescript-ng-shadow/blob/master/src/common/elevation.enum.ts) of standard material design elevations. <br>PS: Since version 2.0, it's calculated in DIPs (or DPs, _density independent pixels_) on Android, or PTs (_points_) on iOS.
 | shape | string => `'RECTANGLE'` \| `'OVAL'` \| `'RING'` \| `'LINE'` | Android | Determines the shape of the view and overrides its format styles.
 | bgcolor | string => color #RGB | Android | Determines view's background color and overrides its previous background. |
-| cornerRadius | number | Android | Determines view's corner radius *(CSS border-radius)* and overrides its previous style. |
+| cornerRadius | number | Android | Determines view's corner radius *(CSS border-radius)* and overrides its previous style. <br>PS: Since version 2.0, it's calculated in DIPs (or DPs, _density independent pixels_). |
 | maskToBounds | boolean => default: false | iOS | Determines whether the shadow will be limited to the view margins. |
 | shadowColor | string => color #RGB | iOS | Determines shadow color. Shadow won't be applied if the view already has background. |
-| shadowOffset | number | iOS | Determines the distance (only on Y axis) of the shadow. Negative value shows the shadow above the view. |
+| shadowOffset | number | iOS | Determines the distance (only on Y axis) of the shadow. Negative value shows the shadow above the view. <br>PS: Since version 2.0, it's calculated in PTs (_points_). |
 | shadowOpacity | number | iOS | From 0 to 1. Determines the opacity level of the shadow. |
-| shadowRadius | number | iOS | Determines the blurring effect of the shadow. The higher the more blurred. |
+| shadowRadius | number | iOS | Determines the blurring effect of the shadow. The higher the more blurred. <br>PS: Since version 2.0, it's calculated in PTs (_points_). |
 
 ### `AndroidData` and `IOSData`
 As you might have noticed the main `shadow` attribute accepts object as argument. You'll be able to assign it in a property bind and it will override any possible separate attribute you might have defined:
@@ -144,7 +143,31 @@ class MyComponent {
 }
 ```
 
+## Notes about version 2.0
+Here are the list of improvements on version 2.0:
+
+1. BugFix: Integer directive not rendering on iOS.
+1. Density independent pixels: Now you no longer have to worry about providing
+   the correct values for pixel related attributes based on the device's
+   screen density.
+   Since iPhone 6S, each point correspond to 9 device pixels
+   (3 horizontally x 3 vertically - that's the reason behind the @3x images -
+   [view more here](https://medium.com/@pnowelldesign/pixel-density-demystified-a4db63ba2922)).
+   The same happens to Android where the benchmark (mdpi) is considered ~160 pixels
+   (or dots) per inch (dpi) and the majority of the modern devices having way
+   denser screens, reaching ~640dpi or more.
+   [Find out more here](https://developer.android.com/guide/practices/screens_support.html).
+1. New Android specific attribute called translationZ. The elevation attribute
+   is the baseline of the virtual Z axis (3D axis), but according to the [official
+   documentation](https://developer.android.com/training/material/shadows-clipping.html)
+   it's not the only part. Then, `translationZ` will add extra distance to the surface
+   and it's mainly used for animations.
+
+
 ## Changelog
+- 2.0.0  Density Independent Pixels / TranslationZ
+- 1.1.3  Minor issues
+- 1.1.2  Fix CI build
 - 1.1.0  Support for iOS custom attributes
 - 1.0.0  Initial implementation
 
