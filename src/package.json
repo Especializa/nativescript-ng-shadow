@@ -1,6 +1,6 @@
 {
     "name": "nativescript-ng-shadow",
-    "version": "1.1.3",
+    "version": "2.0.0",
     "description": "Angular directive to apply shadows to native elements according to the elevation level guidelines of material design specification",
     "main": "ng-shadow",
     "typings": "ng-shadow.d.ts",
