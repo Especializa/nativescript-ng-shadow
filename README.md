@@ -33,6 +33,8 @@ It brings up the [concept of elevation](https://material.io/guidelines/material-
 With this directive, you won't have to worry about all the aspects regarding shadowing on Android and on iOS.
 On the other hand, if you care about any details, just provide extra attributes and they will superseed the default ones.
 
+However, should you be running this on Android you will require the SDK to be greater or equal than 21 (Android 5.0 Lollipop or later), otherwise shadows will simply not be shown. There should be no problem running this on any version of iOS.
+
 #### Import the NgShadowModule
 ```typescript
 // ...
