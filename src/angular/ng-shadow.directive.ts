@@ -114,6 +114,15 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     ) {
       return;
     }
+
+    // For shadows to be shown on Android the SDK has to be greater
+    // or equal than 21, lower SDK means no setElevation method is available
+    if (isAndroid) {
+      if (android.os.Build.VERSION.SDK_INT < 21) {
+        return;
+      }
+    }
+
     const tnsView = this.el.nativeElement;
     if (tnsView.android) {
       this.applyOnAndroid(tnsView.android);
