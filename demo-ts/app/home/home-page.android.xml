@@ -1,0 +1,12 @@
+<Page class="page"
+  navigatingTo="onNavigatingTo"
+  xmlns="http://www.nativescript.org/tns.xsd">
+
+  <ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Android Demo"></Label>
+  </ActionBar>
+
+  <GridLayout rows="*, auto" columns="*" class="page">
+  </GridLayout>
+
+</Page>

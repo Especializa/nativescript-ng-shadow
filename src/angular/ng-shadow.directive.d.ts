@@ -25,9 +25,6 @@ export declare class NativeShadowDirective implements OnInit, OnChanges {
     private initializeCommonData();
     private initializeAndroidData();
     private initializeIOSData();
-    private dipToPixels(nativeView, dip);
-    private applyOnAndroid(nativeView);
-    private applyOnIOS(nativeView);
     private loadFromAndroidData(data);
     private loadFromIOSData(data);
 }

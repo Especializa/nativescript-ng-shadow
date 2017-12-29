@@ -1,15 +1,11 @@
 import { Directive, ElementRef, HostListener,
          Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Color } from 'tns-core-modules/color';
 import { isAndroid, isIOS } from 'tns-core-modules/platform';
 
 import { AndroidData } from '../common/android-data.model';
 import { IOSData } from '../common/ios-data.model';
+import { Shadow } from '../common/shadow';
 import { Shape, ShapeEnum } from '../common/shape.enum';
-
-declare const android: any;
-declare const CGSizeMake: any;
-declare const UIScreen: any;
 
 @Directive({ selector: '[shadow]' })
 export class NativeShadowDirective implements OnInit, OnChanges {
@@ -37,10 +33,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     } else if (isIOS) {
       this.initializeIOSData();
     }
-    if (
-      this.shadow &&
-      (this.shadow as AndroidData | IOSData).elevation
-    ) {
+    if (this.shadow && (this.shadow as AndroidData | IOSData).elevation) {
       if (isAndroid) {
         this.loadFromAndroidData(this.shadow as AndroidData);
       } else if (isIOS) {
@@ -92,10 +85,7 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     ) {
         this.elevation = changes.shadow.currentValue;
       }
-      if (
-        changes.shadow &&
-        changes.shadow.currentValue.elevation
-      ) {
+      if (changes.shadow && changes.shadow.currentValue.elevation) {
         if (isAndroid) {
           this.loadFromAndroidData(this.shadow as AndroidData);
         } else if (isIOS) {
@@ -115,20 +105,21 @@ export class NativeShadowDirective implements OnInit, OnChanges {
       return;
     }
 
-    // For shadows to be shown on Android the SDK has to be greater
-    // or equal than 21, lower SDK means no setElevation method is available
-    if (isAndroid) {
-      if (android.os.Build.VERSION.SDK_INT < 21) {
-        return;
-      }
-    }
-
-    const tnsView = this.el.nativeElement;
-    if (tnsView.android) {
-      this.applyOnAndroid(tnsView.android);
-    } else if (tnsView.ios) {
-      this.applyOnIOS(tnsView.ios);
-    }
+    Shadow.apply(
+      this.el.nativeElement,
+      {
+        elevation: (this.elevation as number),
+        shape: this.shape,
+        bgcolor: this.bgcolor,
+        cornerRadius: this.cornerRadius,
+        translationZ: this.translationZ,
+        maskToBounds: this.maskToBounds,
+        shadowColor: this.shadowColor,
+        shadowOffset: (this.shadowOffset as number),
+        shadowOpacity: (this.shadowOpacity as number),
+        shadowRadius: (this.shadowRadius as number),
+      },
+    );
   }
 
   private initializeCommonData() {
@@ -151,18 +142,9 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     if (typeof this.translationZ === 'string') {
       this.translationZ = parseInt(this.translationZ, 10);
     }
-    if (!this.shape) {
-      this.shape = ShapeEnum.RECTANGLE;
-    }
-    if (!this.bgcolor) {
-      this.bgcolor = '#FFFFFF';
-    }
   }
 
   private initializeIOSData() {
-    if (!this.shadowColor) {
-      this.shadowColor = '#000000';
-    }
     if (typeof this.shadowOffset === 'string') {
       this.shadowOffset = parseFloat(this.shadowOffset);
     }
@@ -172,51 +154,6 @@ export class NativeShadowDirective implements OnInit, OnChanges {
     if (typeof this.shadowRadius === 'string') {
       this.shadowRadius = parseFloat(this.shadowRadius);
     }
-  }
-
-  private dipToPixels(nativeView: any, dip: number) {
-    const metrics = nativeView.getContext().getResources().getDisplayMetrics();
-    return android.util.TypedValue.applyDimension(
-      android.util.TypedValue.COMPLEX_UNIT_DIP,
-      dip,
-      metrics,
-    );
-  }
-
-  private applyOnAndroid(nativeView: any) {
-    const shape = new android.graphics.drawable.GradientDrawable();
-    shape.setShape(
-      android.graphics.drawable.GradientDrawable[this.shape],
-    );
-    shape.setColor(android.graphics.Color.parseColor(this.bgcolor));
-    shape.setCornerRadius(
-      this.dipToPixels(nativeView, this.cornerRadius as number),
-    );
-    nativeView.setBackgroundDrawable(shape);
-    nativeView.setElevation(
-      this.dipToPixels(nativeView, this.elevation as number),
-    );
-    nativeView.setTranslationZ(
-      this.dipToPixels(nativeView, this.translationZ as number),
-    );
-  }
-
-  private applyOnIOS(nativeView: any) {
-    const elevation = parseFloat(((this.elevation as number) - 0).toFixed(2));
-    nativeView.layer.maskToBounds = false;
-    nativeView.layer.shadowColor = new Color(this.shadowColor).ios.CGColor;
-    nativeView.layer.shadowOffset =
-      this.shadowOffset ?
-      CGSizeMake(0, parseFloat(this.shadowOffset as string)) :
-      CGSizeMake(0, 0.54 * elevation - 0.14);
-    nativeView.layer.shadowOpacity =
-      this.shadowOpacity ?
-      parseFloat(this.shadowOpacity as string) :
-      0.006 * elevation + 0.25;
-    nativeView.layer.shadowRadius =
-      this.shadowRadius ?
-      parseFloat(this.shadowRadius as string) :
-      0.66 * elevation - 0.5;
   }
 
   private loadFromAndroidData(data: AndroidData) {
