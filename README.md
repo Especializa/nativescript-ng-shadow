@@ -33,7 +33,7 @@ It brings up the [concept of elevation](https://material.io/guidelines/material-
 With this directive, you won't have to worry about all the aspects regarding shadowing on Android and on iOS.
 On the other hand, if you care about any details, just provide extra attributes and they will superseed the default ones.
 
-However, should you be running this on Android you will require the SDK to be greater or equal than 21 (Android 5.0 Lollipop or later), otherwise shadows will simply not be shown. There should be no problem running this on any version of iOS.
+However, running this on Android you will require the SDK to be greater or equal than 21 (Android 5.0 Lollipop or later), otherwise shadows will simply not be shown. There should be no problem running this on any version of iOS.
 
 #### Import the NgShadowModule
 ```typescript
@@ -77,6 +77,7 @@ The table below list and describes all possible attributes as well as show which
 | shape | string => `'RECTANGLE'` \| `'OVAL'` \| `'RING'` \| `'LINE'` | Android | Determines the shape of the view and overrides its format styles.
 | bgcolor | string => color #RGB | Android | Determines view's background color and overrides its previous background. |
 | cornerRadius | number | Android | Determines view's corner radius *(CSS border-radius)* and overrides its previous style. <br>PS: Since version 2.0, it's calculated in DIPs (or DPs, _density independent pixels_). |
+| translationZ | number | Android | Determines an extra distance (in DIP) to the surface. |
 | maskToBounds | boolean => default: false | iOS | Determines whether the shadow will be limited to the view margins. |
 | shadowColor | string => color #RGB | iOS | Determines shadow color. Shadow won't be applied if the view already has background. |
 | shadowOffset | number | iOS | Determines the distance in points (only on Y axis) of the shadow. Negative value shows the shadow above the view. |
@@ -167,6 +168,7 @@ Here are the list of improvements on version 2.0:
 
 
 ## Changelog
+- 2.0.1  Fix error on old Android devices (< Lollipop)
 - 2.0.0  Density Independent Pixels / TranslationZ
 - 1.1.3  Minor issues
 - 1.1.2  Fix CI build
