@@ -8,6 +8,7 @@ export declare class Shadow {
     static apply(tnsView: any, data: IOSData | AndroidData): void;
     private static getDefaults(data);
     private static applyOnAndroid(tnsView, data);
+    private static overrideDefaultAnimator(nativeView, data);
     private static applyOnIOS(tnsView, data);
-    static androidDipToPx(tnsView: any, dip: number): any;
+    static androidDipToPx(nativeView: any, dip: number): any;
 }

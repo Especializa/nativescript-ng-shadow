@@ -5,6 +5,7 @@ import { IOSData } from "./ios-data.model";
 import { ShapeEnum } from './shape.enum';
 
 declare const android: any;
+declare const java: any;
 declare const CGSizeMake: any;
 declare const UIScreen: any;
 
@@ -14,7 +15,11 @@ export class Shadow {
   static DEFAULT_SHADOW_COLOR = '#000000';
 
   static apply(tnsView: any, data: IOSData | AndroidData) {
-    if (tnsView.android) {
+    if (
+      tnsView.android &&
+      android.os.Build.VERSION.SDK_INT >=
+        android.os.Build.VERSION_CODES.LOLLIPOP
+    ) {
       Shadow.applyOnAndroid(tnsView, Shadow.getDefaults(data));
     } else if (tnsView.ios) {
       Shadow.applyOnIOS(tnsView, Shadow.getDefaults(data));
@@ -42,15 +47,62 @@ export class Shadow {
     );
     shape.setColor(android.graphics.Color.parseColor(data.bgcolor));
     shape.setCornerRadius(
-      Shadow.androidDipToPx(tnsView, data.cornerRadius as number),
+      Shadow.androidDipToPx(nativeView, data.cornerRadius as number),
     );
     nativeView.setBackgroundDrawable(shape);
     nativeView.setElevation(
-      Shadow.androidDipToPx(tnsView, data.elevation as number),
+      Shadow.androidDipToPx(nativeView, data.elevation as number),
     );
     nativeView.setTranslationZ(
-      Shadow.androidDipToPx(tnsView, data.translationZ as number),
+      Shadow.androidDipToPx(nativeView, data.translationZ as number),
     );
+    if (nativeView.getStateListAnimator()) {
+      this.overrideDefaultAnimator(nativeView, data);
+    }
+  }
+
+  private static overrideDefaultAnimator(nativeView: any, data: AndroidData) {
+    const sla = new android.animation.StateListAnimator();
+
+    const ObjectAnimator = android.animation.ObjectAnimator;
+    const AnimatorSet    = android.animation.AnimatorSet;
+    const shortAnimTime  = android.R.integer.config_shortAnimTime;
+
+    const buttonDuration =
+      nativeView.getContext().getResources().getInteger(shortAnimTime) / 2;
+    const pressedElevation = this.androidDipToPx(nativeView, 2);
+    const pressedZ = this.androidDipToPx(nativeView, 4);
+    const elevation = this.androidDipToPx(nativeView, data.elevation);
+    const z = this.androidDipToPx(nativeView, data.translationZ || 0);
+
+    const pressedSet = new AnimatorSet();
+    const notPressedSet = new AnimatorSet();
+    const defaultSet = new AnimatorSet();
+
+    pressedSet.playTogether(java.util.Arrays.asList([
+      ObjectAnimator.ofFloat(nativeView, "translationZ", [pressedZ])
+        .setDuration(buttonDuration),
+      ObjectAnimator.ofFloat(nativeView, "elevation", [pressedElevation])
+        .setDuration(0),
+    ]));
+    notPressedSet.playTogether(java.util.Arrays.asList([
+      ObjectAnimator.ofFloat(nativeView, "translationZ", [z])
+        .setDuration(buttonDuration),
+      ObjectAnimator.ofFloat(nativeView, "elevation", [elevation])
+        .setDuration(0),
+    ]));
+    defaultSet.playTogether(java.util.Arrays.asList([
+      ObjectAnimator.ofFloat(nativeView, "translationZ", [0]).setDuration(0),
+      ObjectAnimator.ofFloat(nativeView, "elevation", [0]).setDuration(0),
+    ]));
+
+    sla.addState(
+      [android.R.attr.state_pressed, android.R.attr.state_enabled],
+      pressedSet,
+    );
+    sla.addState([android.R.attr.state_enabled], notPressedSet);
+    sla.addState([], defaultSet);
+    nativeView.setStateListAnimator(sla);
   }
 
   private static applyOnIOS(tnsView: any, data: IOSData) {
@@ -72,8 +124,7 @@ export class Shadow {
       0.66 * elevation - 0.5;
   }
 
-  static androidDipToPx(tnsView: any, dip: number) {
-    const nativeView = tnsView.android;
+  static androidDipToPx(nativeView: any, dip: number) {
     const metrics = nativeView.getContext().getResources().getDisplayMetrics();
     return android.util.TypedValue.applyDimension(
       android.util.TypedValue.COMPLEX_UNIT_DIP,
