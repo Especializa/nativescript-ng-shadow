@@ -146,7 +146,7 @@ class MyComponent {
 }
 ```
 
-## Notes about version 2.0
+## Notes about version +2
 Here are the list of improvements on version 2.0:
 
 1. BugFix: Integer directive not rendering on iOS.
@@ -165,9 +165,26 @@ Here are the list of improvements on version 2.0:
    documentation](https://developer.android.com/training/material/shadows-clipping.html)
    it's not the only part. Then, `translationZ` will add extra distance to the surface
    and it's mainly used for animations.
+1. **2.1.X** Override Android default StateListAnimator as explained below
 
+### Override Android default StateListAnimator
+
+Android buttons are split into three categories:
+floating, raised and flat. Different from labels and other ui elements,
+each button category has its own state animator.
+So, when buttons as tapped, Android does affect their elevation (and z translation) in a way that Angular is not notified. At the end of tap animation, buttons get back to
+resting defaults (i.e. raised button's `elevation` at 2dp and `translationZ` at 0) overriding
+the shadow stablished by this plugin.
+
+Since version 2.1.0, this plugin replaces the default `StateListAnimator` with one
+that gets back to the values you provide for `elevation` and `translationZ`.
+
+Feel free to fill an issue if you want the flexibility of defining your own
+`StateListAnimator`. The motivation so far was simply put this plugin to work with
+buttons without changing the original state once they are clicked.
 
 ## Changelog
+- 2.1.0  Decouple shadow logic / Override default StateListAnimator
 - 2.0.1  Fix error on old Android devices (< Lollipop)
 - 2.0.0  Density Independent Pixels / TranslationZ
 - 1.1.3  Minor issues
