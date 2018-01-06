@@ -15,10 +15,10 @@ export class Shadow {
   static DEFAULT_SHADOW_COLOR = '#000000';
 
   static apply(tnsView: any, data: IOSData | AndroidData) {
+    const LOLLIPOP = 21;
     if (
       tnsView.android &&
-      android.os.Build.VERSION.SDK_INT >=
-        android.os.Build.VERSION_CODES.LOLLIPOP
+      android.os.Build.VERSION.SDK_INT >= LOLLIPOP
     ) {
       Shadow.applyOnAndroid(tnsView, Shadow.getDefaults(data));
     } else if (tnsView.ios) {
