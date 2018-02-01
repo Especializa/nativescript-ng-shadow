@@ -71,7 +71,9 @@
         "tns-core-modules": "^3.1.0",
         "tns-platform-declarations": "^3.1.0",
         "tslint": "^5.0.0",
-        "typescript": "~2.4.0"
+        "typescript": "~2.4.0",
+        "@angular/compiler": "~4.2.5",
+        "@angular/compiler-cli": "~4.2.5"
     },
     "dependencies": {},
     "bootstrapper": "nativescript-plugin-seed"
