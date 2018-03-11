@@ -28,7 +28,8 @@ pack() {
     # compile package and copy files required by npm
     echo 'Building /src...'
     cd "$TO_SOURCE_DIR"
-    node_modules/.bin/tsc
+    # compile project with ngc compiler
+    npm run ngc
     cd ..
 
     echo 'Creating package...'

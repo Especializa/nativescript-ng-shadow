@@ -26,7 +26,8 @@
         "demo.reset": "cd ../demo && rimraf platforms",
         "plugin.prepare": "npm run tsc && cd ../demo && tns plugin remove nativescript-ng-shadow && tns plugin add ../src",
         "clean": "cd ../demo && rimraf hooks node_modules platforms && cd ../src && rimraf node_modules && npm run plugin.link",
-        "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/tns_modules/**' --exclude '**/*.d.ts'"
+        "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/tns_modules/**' --exclude '**/*.d.ts'",
+        "ngc": "./node_modules/.bin/ngc --p tsconfig.ngc.json"
     },
     "keywords": [
         "NativeScript",
@@ -71,7 +72,8 @@
         "tns-core-modules": "^3.1.0",
         "tns-platform-declarations": "^3.1.0",
         "tslint": "^5.0.0",
-        "typescript": "~2.4.0"
+        "typescript": "~2.4.0",
+        "@angular/compiler-cli": "~4.2.5"
     },
     "dependencies": {},
     "bootstrapper": "nativescript-plugin-seed"
