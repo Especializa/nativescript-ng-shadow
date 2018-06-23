@@ -1,0 +1,21 @@
+<ActionBar class="action-bar">
+  <Label class="action-bar-title" text="iOS Demo"></Label>
+</ActionBar>
+
+<GridLayout rows="*, auto" columns="*" class="page">
+  <StackLayout row="0" col="0">
+    <StackLayout [shadow]="elevation">
+      <Label class="h3 m-15 p-10 ex1" [text]="'shadow=\''+elevation+'\''"></Label>
+    </StackLayout>
+    <StackLayout shadow [elevation]="elevation">
+      <Label class="h3 m-15 p-10 ex2" [text]="'shadow elevation=\''+elevation+'\''"></Label>
+    </StackLayout>
+    <StackLayout shadow [elevation]="elevation" [shadowOffset]="4">
+      <Label class="h3 m-15 p-10 ex3" [text]="'shadow [elevation]=\''+elevation+'\' shadowOffset=\'4\''"></Label>
+    </StackLayout>
+    <StackLayout shadow [elevation]="elevation">
+      <Label class="h1 m-15 p-15 ex4" text="☺"></Label>
+    </StackLayout>
+  </StackLayout>
+  <ListPicker row="1" col="0" [items]="stdElevations" selectedIndex="2" (selectedIndexChange)="setElevation($event)" class="p-15"></ListPicker>
+</GridLayout>

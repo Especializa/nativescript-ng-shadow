@@ -1,23 +1,23 @@
-import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptCommonModule } from "nativescript-angular/common";
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 
-import { HomeRoutingModule } from "./home-routing.module";
-import { HomeComponent } from "./home.component";
+import { HomeRoutingModule } from './home-routing.module';
+import { HomeComponent } from './home.component';
 
-import { MyLibModule } from '../lib/src/public_api';
+import { NgShadowModule } from '../lib/src/public_api';
 
 
 @NgModule({
     imports: [
-        NativeScriptCommonModule,
+        NativeScriptModule,
         HomeRoutingModule,
-        MyLibModule
+        NgShadowModule,
     ],
     declarations: [
-        HomeComponent
+        HomeComponent,
     ],
     schemas: [
-        NO_ERRORS_SCHEMA
-    ]
+        NO_ERRORS_SCHEMA,
+    ],
 })
 export class HomeModule { }

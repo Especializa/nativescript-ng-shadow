@@ -1,0 +1,14 @@
+<ActionBar class="action-bar">
+  <Label class="action-bar-title" text="Android Demo"></Label>
+</ActionBar>
+
+<GridLayout rows="*, auto" columns="*" class="page">
+  <StackLayout row="0" col="0">
+    <Button class="h3 m-15 p-10 ex1" [text]="'shadow=\''+elevation+'\''" [shadow]="elevation"></Button>
+    <Label class="h3 m-15 p-10 ex2" [text]="'shadow elevation=\''+elevation+'\''" shadow [elevation]="elevation"></Label>
+    <Label class="h3 m-15 p-10 ex3" [text]="'shadow [elevation]=\''+elevation+'\' bgcolor=\'#006968\' [shape]=\'shape.RECTANGLE\' corderRadius=15'" shadow [elevation]="elevation" bgcolor="#006968" [shape]="shape.RECTANGLE" cornerRadius="15"></Label>
+    <Label class="h1 m-15 p-15 ex4" text="☺" [shadow]="androidData"></Label>
+    <Label class="h3 m-15 lbl5" [text]="'{ elevation: '+elevation+', bgcolor: \'#ff1744\', shape: shape.OVAL }'"></Label>
+  </StackLayout>
+  <ListPicker row="1" col="0" [items]="stdElevations" selectedIndex="2" (selectedIndexChange)="setElevation($event)" class="p-15"></ListPicker>
+</GridLayout>
