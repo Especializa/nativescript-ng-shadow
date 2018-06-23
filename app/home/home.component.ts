@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { AndroidData, Elevation,
-  Shape, ShapeEnum } from '../lib/src/public_api';
+import { Component, OnInit } from "@angular/core";
+import {
+  AndroidData,
+  Elevation,
+  Shape,
+  ShapeEnum
+} from "../lib/src/public_api";
 
-import { ListPicker } from 'ui/list-picker';
+import { ListPicker } from "ui/list-picker";
 
 @Component({
   moduleId: module.id,
-  selector: 'Home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: "Home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
   elevation = 2;
@@ -28,8 +32,8 @@ export class HomeComponent implements OnInit {
   getAndroidData(): AndroidData {
     return {
       elevation: this.elevation,
-      bgcolor: '#ff1744',
-      shape: ShapeEnum.OVAL,
+      bgcolor: "#ff1744",
+      shape: ShapeEnum.OVAL
     };
   }
 
