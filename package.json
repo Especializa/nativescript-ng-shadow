@@ -10,7 +10,7 @@
     }
   },
   "scripts": {
-    "build": "ng-packagr -p app/lib/package.json"
+    "build": "`ng-packagr -p app/lib/package.json`"
   },
   "dependencies": {
     "@angular/animations": "~5.2.0",
