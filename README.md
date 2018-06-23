@@ -7,7 +7,7 @@
 [npm-image]:http://img.shields.io/npm/v/nativescript-ngx-shadow.svg
 [npm-url]:https://npmjs.org/package/nativescript-ngx-shadow
 [downloads-image]:http://img.shields.io/npm/dt/nativescript-ngx-shadow.svg
-[twitter-image]:https://img.shields.io/twitter/follow/_joshsommer.svg?style=social&label=Follow%20us
+[twitter-image]:https://img.shields.io/twitter/follow/_joshsommer.svg?style=social&label=Josh%20Sommer
 [twitter-url]:https://twitter.com/_joshsommer
 
 This repo is a fork of @Especializa's NativeScript Shadow Directive.
