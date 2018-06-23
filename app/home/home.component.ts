@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AndroidData, Elevation,
-        Shape, ShapeEnum } from 'nativescript-ng-shadow';
+  Shape, ShapeEnum } from '../lib/src/public_api';
+
 import { ListPicker } from 'ui/list-picker';
 
 @Component({
