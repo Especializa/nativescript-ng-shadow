@@ -1,6 +1,6 @@
 # NativeScript Angular Shadow Directive Plugin ![apple](https://cdn3.iconfinder.com/data/icons/picons-social/57/16-apple-32.png) ![android](https://cdn4.iconfinder.com/data/icons/logos-3/228/android-32.png)
 
-This repo is a for on @Especializa's NativeScript Shadow Directive.
+This repo is a fork of @Especializa's NativeScript Shadow Directive.
 https://github.com/Especializa/nativescript-ng-shadow
 
 ## Installation
