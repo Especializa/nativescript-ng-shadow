@@ -1,13 +1,19 @@
 {
   "name": "nativescript-ngx-shadow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.com/TheOriginalJosh/nativescrip-ngx-shadow.git",
   "author": "Josh Sommer <joshdsommer@gmail.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "peerDependencies": {
     "@angular/core": ">=6.0.0",
     "@angular/common": ">=6.0.0"
+  },
+  "nativescript": {
+    "platforms": {
+      "android": "4.0.1",
+      "ios": "4.0.1"
+    }
   },
   "ngPackage": {
     "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
