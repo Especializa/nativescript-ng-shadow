@@ -1,4 +1,0 @@
-*.map
-*.ts
-!*.d.ts
-tsconfig.json
