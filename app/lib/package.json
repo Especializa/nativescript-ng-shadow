@@ -1,7 +1,7 @@
 {
   "name": "nativescript-ngx-shadow",
-  "version": "1.0.1",
-  "repository": "https://github.com/TheOriginalJosh/nativescrip-ngx-shadow.git",
+  "version": "1.0.3",
+  "repository": "https://github.com/TheOriginalJosh/nativescript-ngx-shadow.git",
   "author": "Josh Sommer <joshdsommer@gmail.com>",
   "license": "MIT",
   "private": false,
