@@ -10,7 +10,9 @@
     }
   },
   "scripts": {
-    "build": "ng-packagr -p app/lib/package.json"
+    "build": "ng-packagr -p app/lib/package.json",
+    "ios": "tns run ios --syncAllFiles",
+    "android": "tns run android --syncAllFiles"
   },
   "dependencies": {
     "@angular/animations": "~5.2.0",
