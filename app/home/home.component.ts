@@ -4,7 +4,7 @@ import {
   Elevation,
   Shape,
   ShapeEnum
-} from "../../lib/src/public_api";
+} from "nativescript-ngx-shadow";
 
 import { ListPicker } from "ui/list-picker";
 
