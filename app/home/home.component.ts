@@ -4,7 +4,7 @@ import {
   Elevation,
   Shape,
   ShapeEnum
-} from "../lib/src/public_api";
+} from "../../lib/src/public_api";
 
 import { ListPicker } from "ui/list-picker";
 
